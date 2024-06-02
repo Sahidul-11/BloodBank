@@ -1,7 +1,7 @@
 import Hamburger from 'hamburger-react';
 import React, { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
         </li>
     </>
     return (
-        <header className="p-4 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800">
+        <header  className=" p-4 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800">
             <div className="container flex justify-between h-16 mx-auto">
                 <div>
                     <div className="lg:hidden">
@@ -65,8 +65,11 @@ const Navbar = () => {
                             <li><a>Item 2</a></li>
                         </ul>
                     </div> : <div className="items-center flex-shrink-0 lg:flex">
-                        <button className="self-center px-8 py-3 rounded ease-in-out duration-300">Sign in</button>
-                        <button className="self-center px-8 py-3 font-semibold rounded bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50 ease-in-out duration-300">Sign up</button>
+                        <Link to="/logIn"> <button className="self-center px-8 py-3 rounded ease-in-out duration-300">Sign in</button></Link>
+                        <Link to="/registration"> <button className="self-center px-8 py-3 font-semibold rounded bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50 ease-in-out duration-300">Sign up</button></Link>
+
+                       
+                       
                     </div>
 
                 }
