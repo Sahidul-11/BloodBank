@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+
 import { createContext, useEffect, useState } from 'react'
 import {
   GoogleAuthProvider,
@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
     return data
   }
 
-  // onAuthStateChange
+  onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
@@ -96,9 +96,5 @@ const AuthProvider = ({ children }) => {
   )
 }
 
-AuthProvider.propTypes = {
-  // Array of children.
-  children: PropTypes.array,
-}
 
 export default AuthProvider
