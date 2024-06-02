@@ -1,9 +1,12 @@
 import React from 'react';
+import Banner from '../../Components/Home/Banner';
+import ContractUs from '../../Components/Home/ContractUs';
 
 const Home = () => {
   return (
     <div>
-      <h1 className='text-red-200 tex'>home</h1>
+    <Banner></Banner>
+    <ContractUs></ContractUs>
     </div>
   );
 };

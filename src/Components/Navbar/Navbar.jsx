@@ -8,22 +8,22 @@ const Navbar = () => {
     const [isOpen, setOpen] = useState(false)
     const { user } = useAuth()
     const link = <>
-      
+
         <li className="flex">
             <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Home</NavLink>
         </li>
         <li className="flex">
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Donation Requests</NavLink>
+            <NavLink to="/donation-req" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')}>Donation Requests</NavLink>
         </li>
         <li className="flex">
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Blogs</NavLink>
+            <NavLink to="/blogs" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Blogs</NavLink>
         </li>
         <li className="flex">
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} > Funding</NavLink>
+            <NavLink to="/funding" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} > Funding</NavLink>
         </li>
     </>
     return (
-        <header  className=" p-4 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800">
+        <header className=" p-4 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800">
             <div className="container flex justify-between h-16 mx-auto">
                 <div>
                     <div className="lg:hidden">
@@ -33,7 +33,7 @@ const Navbar = () => {
                         <li>
                             <h2 className="menu-title">Title</h2>
                             <ul>
-                               {link}
+                                {link}
                             </ul>
                         </li>
                     </ul>
@@ -46,10 +46,10 @@ const Navbar = () => {
                 </a>
                 <ul className="items-stretch hidden space-x-3 lg:flex">
 
-                 
-                  {
-                    link
-                  }
+
+                    {
+                        link
+                    }
                 </ul>
                 {
                     user ? <div className="dropdown dropdown-end">
@@ -68,8 +68,8 @@ const Navbar = () => {
                         <Link to="/logIn"> <button className="self-center px-8 py-3 rounded ease-in-out duration-300">Sign in</button></Link>
                         <Link to="/registration"> <button className="self-center px-8 py-3 font-semibold rounded bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50 ease-in-out duration-300">Sign up</button></Link>
 
-                       
-                       
+
+
                     </div>
 
                 }

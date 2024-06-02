@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Registration = () => {
     return (
         <div>
-            <div className="font-sans">
+            <div className="font-sans text-slate-800">
                 <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
                     <div className="relative w-9/12  md:w-1/3">
                         <div className="card bg-blue-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
@@ -20,11 +20,31 @@ const Registration = () => {
                                 <div className="mt-7">
                                     <input type="email" required name='email' placeholder="Email address" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                                 </div>
-                                <div className="mt-7">
-                                    <input type="text" name='photoURL' placeholder="Photo URL" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                <div className="mt-2">
+                                    <label htmlFor="" className='text-xl font-semibold'>Your Profile picture</label>
+                                    <input type="file" name='photoURL' placeholder="Photo URL" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                </div>
+                                <div className="mt-2 w-full">
+                                    <label htmlFor="" className='text-xl font-semibold'>Select your Blood Group</label>
+                                    <select className="select select-primary w-full max-w-xs mt-1 block border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+                                        <option disabled selected>What is Blood group?</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB">AB</option>
+                                        <option value="AB">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
                                 </div>
                                 <div className="mt-7">
                                     <input type="password" name='password' required placeholder="Enter password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+
+                                    {/* <p className=' text-red-700'>{error}</p> */}
+                                </div>
+                                <div className="mt-7">
+                                    <input type="password" name='confirm-password' required placeholder="Confirm password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
 
                                     {/* <p className=' text-red-700'>{error}</p> */}
                                 </div>
