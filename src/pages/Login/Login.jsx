@@ -1,7 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import { BeatLoader } from 'react-spinners';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+  const {signIn ,loading, setLoading } = useAuth()
+  const navigation = useNavigate()
+  const location = useLocation()
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault()
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    try{
+      setLoading(true)
+      await signIn(email ,password)
+      toast.success("Successfully Logged In")
+      navigation(location.state || "/")
+    }
+    catch(err){
+      setLoading(false)
+      toast.error(err.message) 
+    }
+
+  }
   return (
     <div>
       <section className=" flex-wrap-reverse md:flex-wrap flex h-[550px] lg:items-center justify-between">
@@ -10,12 +34,14 @@ const Login = () => {
             <h1 className="text-2xl font-bold sm:text-3xl">Get started today!</h1>
           </div>
 
-          <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form onSubmit={handleSubmit} action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">Email</label>
 
               <div className="relative">
                 <input
+                required
+                name='email'
                   type="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
@@ -45,6 +71,8 @@ const Login = () => {
 
               <div className="relative">
                 <input
+                required
+                name='password'
                   type="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
@@ -83,9 +111,10 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-              >
-                Sign in
+                className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">
+                {
+                  loading ?<BeatLoader color="#36d7b7" /> : "Log In"
+                }
               </button>
             </div>
           </form>

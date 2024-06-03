@@ -2,11 +2,34 @@ import Hamburger from 'hamburger-react';
 import React, { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { Link, NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false)
-    const { user } = useAuth()
+    const { user ,logOut } = useAuth()
+
+
+    const handleLogOut=()=>{
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes,Log Out!"
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+                await logOut()
+              Swal.fire({
+                title: "Logged Out!",
+                text: "Your file has been logged Out.",
+                icon: "success"
+              });
+            }
+          });
+    }
     const link = <>
 
         <li className="flex">
@@ -56,13 +79,13 @@ const Navbar = () => {
                         <div tabIndex={0} role="button">
                             <div className="avatar">
                                 <div className="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    <img src={user?.photoURL} />
                                 </div>
                             </div>
                         </div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-slate-800">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
+                           <li><Link to="/dashboard" className='btn btn-outline mb-8 text-xl'> Dashboard</Link></li> 
+                            <li onClick={handleLogOut}><button className='btn bg-red-600 hover:text-red-500 text-white'>Log Out</button></li>
                         </ul>
                     </div> : <div className="items-center flex-shrink-0 lg:flex">
                         <Link to="/logIn"> <button className="self-center px-8 py-3 rounded ease-in-out duration-300">Sign in</button></Link>

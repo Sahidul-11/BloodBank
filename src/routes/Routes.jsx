@@ -7,6 +7,7 @@ import Blogs from '../pages/Blogs/Blogs'
 import Registration from '../pages/Registration/Registration'
 import DonationReq from '../pages/DonationRequest/DonationReq'
 import Funding from '../pages/Funding/Funding'
+import DashboardLayOut from '../layouts/DashboardLayOut'
 
 export const router = createBrowserRouter([
   {
@@ -37,12 +38,19 @@ export const router = createBrowserRouter([
       {
         path: '/registration',
         element:<Registration/>
-      },
-    
-    
-    
-     
+      },  
     ],
   },
+  {
+    path: '/dashboard',
+    element: <DashboardLayOut />,
+    errorElement: <ErrorPage />, 
+    children : [
+
+      {
+        
+      }
+    ]
+  }
   
 ])
