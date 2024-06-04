@@ -1,12 +1,12 @@
 import React from 'react';
-import Sidebar from '../Components/Dashboard/Sidebar/Sidebar';
+import Sidebars from '../Components/Dashboard/Sidebar/Sidebars';
 import { Outlet } from 'react-router-dom';
 
 const DashboardLayOut = () => {
     return (
-        <div>
-            <div><Sidebar></Sidebar></div>
-            <div><Outlet></Outlet></div>
+        <div className=' lg:flex'>
+            <div><Sidebars></Sidebars></div>
+            <div className='w-full'><Outlet></Outlet></div>
 
         </div>
     );

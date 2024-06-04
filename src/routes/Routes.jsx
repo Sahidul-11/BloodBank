@@ -8,6 +8,10 @@ import Registration from '../pages/Registration/Registration'
 import DonationReq from '../pages/DonationRequest/DonationReq'
 import Funding from '../pages/Funding/Funding'
 import DashboardLayOut from '../layouts/DashboardLayOut'
+import PrivateRoute from './PrivateRoute'
+import Profile from '../pages/Dashboard/Profile/Profile'
+import Welcome from '../pages/Dashboard/Welcome/Welcome'
+import ProfileUpdate from '../Components/Dashboard/Profile/ProfileUpdate'
 
 export const router = createBrowserRouter([
   {
@@ -43,12 +47,23 @@ export const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <DashboardLayOut />,
+    element:<PrivateRoute> <DashboardLayOut /></PrivateRoute>,
     errorElement: <ErrorPage />, 
     children : [
 
       {
-        
+        path :"/dashboard/profile",
+        element : <Profile></Profile>
+      },
+      {
+        path : "/dashboard",
+        element :<Welcome/>
+
+      },
+      {
+        path : "/dashboard/profile/update",
+        element :<PrivateRoute><ProfileUpdate/></PrivateRoute>,
+
       }
     ]
   }
