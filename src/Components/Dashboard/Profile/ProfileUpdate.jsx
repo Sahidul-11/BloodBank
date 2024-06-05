@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosCommon from '../../../hooks/useAxiosCommon';
-import useAuth from '../../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -8,25 +7,29 @@ import { BeatLoader } from 'react-spinners';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../../Share/Spinner';
+import useAuth from '../../../hooks/useAuth';
 
 const ProfileUpdate = () => {
     const [divisions, setDivisions] = useState()
     const [districts, setDistrict] = useState()
     const [upo, setUpo] = useState()
+    const [a ,setA] =useState()
     const axiosCommon = useAxiosCommon()
-    const { createUser, updateUserProfile, loading, setLoading } = useAuth()
+    const { updateUserProfile, loading, setLoading, user } = useAuth()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
-    const { user } = useAuth()
 
 
     const { isPending, isError, data, error } = useQuery({
-        queryKey: ['user'],
+        queryKey: ['users'],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/user/${user?.email}`)
-            return data
+          return data
+            
         }
     })
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -36,25 +39,40 @@ const ProfileUpdate = () => {
         const district = form.district.value;
         const upazila = form.upazila.value;
         const image = form.image.files[0];
-        const status = true;
         const formData = new FormData()
         formData.append('image', image)
-
         try {
             setLoading(true)
-            const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KAY}`,
-                formData
-            )
-            const avatar = data?.data?.display_url
-            await updateUserProfile(name, data?.data?.display_url)
-            const user = { name, avatar, BloodGroup, division, district, upazila, status }
-            await axiosSecure.put("/user", user)
-                .then(res => console.log(res.data))
-            toast.success("Successfully Sign up")
-            navigate("/")
+            if (image) {
+                const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KAY}`,
+                    formData)
+                const avar = data?.data?.display_url;
+                const updateInfo = { name, avatar: avar, BloodGroup, division, district, upazila, }
+                await updateUserProfile(name, avar)
+
+                await axiosSecure.put(`/user/${user?.email}`, updateInfo)
+                    .then(res => console.log(res.data))
+                toast.success("Successfully Sign up")
+                navigate("/dashboard/profile")
+                setLoading(false)
+            }
+            else { 
+                const avatar = user.photoURL;
+                const updateInfo = { name, avatar, BloodGroup, division, district, upazila, }
+                await updateUserProfile(name, avatar)
+
+                await axiosSecure.put(`/user/${user?.email}`, updateInfo)
+                    .then(res => console.log(res.data))
+                toast.success("Successfully Saved Changes")
+                navigate("/dashboard/profile")
+                setLoading(false)
+            }
+
 
         }
         catch (err) {
+            setLoading(false)
+            console.log(err)
             toast.error(err?.message)
         }
 
@@ -85,7 +103,8 @@ const ProfileUpdate = () => {
     if (isError) {
         return toast.error(error.message)
     }
-    const { name, email, BloodGroup, division, district, upazila} = data;
+    const { name, email, BloodGroup, division, district, upazila } = data;
+
     return (
         <div>
             <div className="font-sans text-slate-800">
@@ -95,14 +114,14 @@ const ProfileUpdate = () => {
                         <div className="card bg-red-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
                         <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
                             <label for="" className="block mt-3 text-3xl text-gray-700 text-center font-semibold">
-                            Update Profile
+                                Update Profile
                             </label>
                             <form onSubmit={handleSubmit} method="#" action="#" className="mt-10">
                                 <div>
                                     <input type="text" defaultValue={name} placeholder="Full Name" name='name' className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                                 </div>
                                 <div className="mt-7">
-                                    <input type="email"  disabled defaultValue={email} name='email' placeholder="Email address" className="mt-1 block w-full border-none bg-gray-100 h-11 cursor-not-allowed rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                    <input type="email" disabled defaultValue={email} name='email' placeholder="Email address" className="mt-1 block w-full border-none bg-gray-100 h-11 cursor-not-allowed rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                                 </div>
                                 <div className="mt-2">
                                     <label htmlFor="" className='text-xl font-semibold'>Your Profile picture</label>
@@ -155,7 +174,7 @@ const ProfileUpdate = () => {
                                 </div>
                                 <div className="mt-7">
                                     <button type='submit' className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
-                                        {loading ? <BeatLoader color="#36d7b7" /> : "Update"}
+                                        {loading ? <BeatLoader color="#36d7b7" /> : "Save Changes"}
                                     </button>
                                 </div>
 
