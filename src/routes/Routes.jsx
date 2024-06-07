@@ -5,13 +5,15 @@ import Login from '../pages/Login/Login'
 import Home from '../pages/Home/Home'
 import Blogs from '../pages/Blogs/Blogs'
 import Registration from '../pages/Registration/Registration'
-import DonationReq from '../pages/DonationRequest/DonationReq'
 import Funding from '../pages/Funding/Funding'
 import DashboardLayOut from '../layouts/DashboardLayOut'
 import PrivateRoute from './PrivateRoute'
 import Profile from '../pages/Dashboard/Profile/Profile'
 import Welcome from '../pages/Dashboard/Welcome/Welcome'
 import ProfileUpdate from '../Components/Dashboard/Profile/ProfileUpdate'
+import AllUsers from '../pages/Dashboard/AllUsers/AllUsers'
+import AdminRoute from './AdminRoute'
+import CreateDonationReq from '../pages/Dashboard/CreateDonationReq/CreateDonationReq'
 
 export const router = createBrowserRouter([
   {
@@ -26,10 +28,6 @@ export const router = createBrowserRouter([
       {
         path: '/funding',
         element:<Funding/>
-      },
-      {
-        path: '/donation-req',
-        element:<DonationReq/>
       },
       {
         path: '/blogs',
@@ -59,6 +57,15 @@ export const router = createBrowserRouter([
         path : "/dashboard",
         element :<Welcome/>
 
+      },
+      {
+        path : "/dashboard/create-donation-request",
+        element :<CreateDonationReq/>
+
+      },
+      {
+        path : "/dashboard/all-users",
+        element :<AdminRoute><AllUsers/></AdminRoute>
       },
       {
         path : "/dashboard/profile/update",

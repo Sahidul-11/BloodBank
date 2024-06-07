@@ -7,10 +7,8 @@ import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const [isOpen, setOpen] = useState(false)
-    const { user ,logOut } = useAuth()
-
-
-    const handleLogOut=()=>{
+    const { user, logOut } = useAuth()
+    const handleLogOut = () => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -19,16 +17,16 @@ const Navbar = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes,Log Out!"
-          }).then(async(result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 await logOut()
-              Swal.fire({
-                title: "Logged Out!",
-                text: "Your file has been logged Out.",
-                icon: "success"
-              });
+                Swal.fire({
+                    title: "Logged Out!",
+                    text: "Your file has been logged Out.",
+                    icon: "success"
+                });
             }
-          });
+        });
     }
     const link = <>
 
@@ -84,7 +82,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-slate-800">
-                           <li><Link to="/dashboard" className='btn btn-outline mb-8 text-xl'> Dashboard</Link></li> 
+                            <li><Link to="/dashboard" className='btn btn-outline mb-8 text-xl'> Dashboard</Link></li>
                             <li onClick={handleLogOut}><button className='btn bg-red-600 hover:text-red-500 text-white'>Log Out</button></li>
                         </ul>
                     </div> : <div className="items-center flex-shrink-0 lg:flex">
