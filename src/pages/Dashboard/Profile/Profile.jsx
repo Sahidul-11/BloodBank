@@ -1,31 +1,11 @@
 import React from 'react';
-import useAuth from '../../../hooks/useAuth';
 import { Button } from 'flowbite-react';
-import toast from 'react-hot-toast';
-import Spinner from '../../../Components/Share/Spinner';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import useUser from '../../../hooks/useUser';
 
 const Profile = () => {
-    const axiosSecure = useAxiosSecure()
-    const {user} =useAuth()
-    const { isPending, isError, data, error } = useQuery({
-        queryKey: ['user'],
-        queryFn:async()=>{
-          const {data}= await axiosSecure.get(`/user/${user?.email}`)
-          return data
-        }
-      })
-    
-      if (isPending) {
-        return Spinner()
-      }
-    
-      if (isError) {
-        return toast.error(error.message)
-      }
-     const {name ,avatar, email ,BloodGroup,division, district , upazila , role,status} = data;
+    const {data}=useUser()
+     const {name ,avatar, email ,BloodGroup,division, district , upazila , role} = data;
     return (
         <div>
             <div  className="flex relative flex-col justify-center p-6 shadow-md rounded-xl sm:px-12  bg-gray-900 dark:bg-gray-50  text-gray-100 dark:text-gray-800">
