@@ -14,6 +14,8 @@ import ProfileUpdate from '../Components/Dashboard/Profile/ProfileUpdate'
 import AllUsers from '../pages/Dashboard/AllUsers/AllUsers'
 import AdminRoute from './AdminRoute'
 import CreateDonationReq from '../pages/Dashboard/CreateDonationReq/CreateDonationReq'
+import MyBloodDonationReq from '../pages/Dashboard/MyBloodDonationReq/MyBloodDonationReq'
+import ReqDetails from '../pages/Dashboard/MyBloodDonationReq/ReqDetails'
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +63,16 @@ export const router = createBrowserRouter([
       {
         path : "/dashboard/create-donation-request",
         element :<CreateDonationReq/>
+
+      },
+      {
+        path : "/dashboard/my-donation-requests",
+        element :<MyBloodDonationReq/>
+
+      },
+      {
+        path : "/dashboard/my-donation-requests/:id",
+        element :<ReqDetails/>
 
       },
       {

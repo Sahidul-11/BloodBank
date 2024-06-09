@@ -7,6 +7,7 @@ import useAuth from '../../../hooks/useAuth';
 import { LuUsers2 } from 'react-icons/lu';
 import useRole from '../../../hooks/useRole';
 import { FaRegEdit } from 'react-icons/fa';
+import { TiSortAlphabetically } from 'react-icons/ti';
 
 
 const Sidebars = () => {
@@ -44,11 +45,11 @@ const Sidebars = () => {
 
             </div>
 
-            <Sidebar aria-label="Sidebar with logo branding example" className={`${isOpen ? "visible" : "hidden lg:visible"}`}>
+            <Sidebar aria-label="Sidebar with logo branding example" className={`${isOpen ? "visible" : "hidden lg:visible"} w-full`}>
                 <Sidebar.Logo href="#" img="/favicon.svg" imgAlt="Flowbite logo">
                     Flowbite
                 </Sidebar.Logo>
-                <Sidebar.Items className='min-h-[calc(100vh-150px)] lg:min-h-[calc(100vh-60px)]'>
+                <Sidebar.Items className='min-h-[calc(100vh-150px)] lg:min-h-[calc(100vh-60px)] w-full'>
                     <Sidebar.ItemGroup>
                         <NavLink to="/dashboard">
                             <Sidebar.Item icon={HiChartPie}>
@@ -58,6 +59,11 @@ const Sidebars = () => {
                         <NavLink to="/dashboard/profile">
                             <Sidebar.Item icon={HiUser}>
                                 Profile
+                            </Sidebar.Item>
+                        </NavLink>
+                        <NavLink to="/dashboard/my-donation-requests">
+                            <Sidebar.Item icon={TiSortAlphabetically }>
+                               My Blood Donation Requests
                             </Sidebar.Item>
                         </NavLink>
                         {

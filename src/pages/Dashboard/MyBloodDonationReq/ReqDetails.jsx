@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
 import toast from 'react-hot-toast';
-import { BeatLoader } from 'react-spinners';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Spinner from '../../../Components/Share/Spinner';
 import useAxiosCommon from '../../../hooks/useAxiosCommon';
-import useUser from '../../../hooks/useUser';
 
-
-
-
-const CreateDonationReq = () => {
+const ReqDetails = () => {
+    const { id } = useParams()
     const axiosCommon = useAxiosCommon()
     const [divisions, setDivisions] = useState()
     const [districts, setDistrict] = useState()
@@ -18,7 +15,6 @@ const CreateDonationReq = () => {
     const { loading, setLoading, user } = useAuth()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
-    const { data } = useUser('/user')
     console.log(data)
 
     const checkBlocked = () => {
@@ -82,6 +78,23 @@ const CreateDonationReq = () => {
         axiosCommon.get(`/upazila/${id}`)
             .then(res => setUpo(res.data))
     }
+    
+    const { isPending, isError, data, error, refetch } = useQuery({
+        queryKey: ['OneDonation'],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/aDonationReq/${id}`)
+            return data
+        }
+    })
+    console.log(data)
+    if (isPending) {
+        return Spinner()
+    }
+
+    if (isError) {
+        return toast.error(error.message)
+    }
+    console.log(id)
     return (
         <div>
             <div className="font-sans text-slate-800">
@@ -90,14 +103,9 @@ const CreateDonationReq = () => {
                         <div className="card bg-blue-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
                         <div className="card bg-red-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div>
                         <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
-                            {
-                                data?.status ? <label for="" className="block mt-3 text-3xl text-gray-700 text-center font-semibold">
-                                    Make Request for Blood Donation
-                                </label> : <label for="" className="block mt-3 text-3xl text-red-700 text-center font-semibold">
-                                    You are Blocked , Unable to request
-                                </label>
-                            }
-
+                            <label for="" className="block mt-3 text-3xl text-red-700 text-center font-semibold">
+                                Update Blood Donation  request
+                            </label>
                             <form onSubmit={handleSubmit} method="#" action="#" onClick={checkBlocked} className="mt-10" >
                                 <div className=" md:flex justify-between items-center gap-5">
                                     <div className='w-full'>
@@ -117,8 +125,6 @@ const CreateDonationReq = () => {
                                     </div>
 
                                 </div>
-
-
                                 <div className="md:flex justify-between items-center gap-5">
                                     <div className="mt-2 w-full">
                                         <label htmlFor="" className='text-xl font-semibold'>Select Blood Group</label>
@@ -203,4 +209,4 @@ const CreateDonationReq = () => {
     );
 };
 
-export default CreateDonationReq;
+export default ReqDetails;
