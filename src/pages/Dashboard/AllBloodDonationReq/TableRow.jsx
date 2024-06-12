@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { Button, Modal } from 'flowbite-react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useDelete from '../../../hooks/useDelete';
-import { Button, Modal } from 'flowbite-react';
-import { Link } from 'react-router-dom';
+import useRole from '../../../hooks/useRole';
 
-const DonationReqTable = ({ req, refetch }) => {
-    const axiosSecure = useAxiosSecure()
+const TableRow = ({ req, refetch }) => {
+    const axiosSecure = useAxiosSecure ()
     const { handleDelete } = useDelete()
     const [openModal, setOpenModal] = useState(false);
+    const [role, isLoading]= useRole()
+    if (isLoading) {
+       return 
+    }
+    console.log(role)
     const { _id, requesterName, requesterEmail, recipientName, hospitalName, message, address, dateTime, BloodGroup, division, district, upazila, status } = req
     const [Date, time] = dateTime.split("T")
     const handleStatus = (changeStatus) => {
@@ -26,7 +31,7 @@ const DonationReqTable = ({ req, refetch }) => {
                     .then(result => {
                         if (result) {
                             refetch()
-                            Swal.fire({
+                            Swal .fire({
                                 title: `${changeStatus} !`,
                                 text: "Your file has been deleted.",
                                 icon: "success"
@@ -46,7 +51,7 @@ const DonationReqTable = ({ req, refetch }) => {
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div> <span className="block text-sm font-medium">{upazila} , {district}</span>
-                 </div>
+                </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <span className="block text-sm font-medium">Date : {Date}</span>
@@ -61,13 +66,8 @@ const DonationReqTable = ({ req, refetch }) => {
 
             </td>
             <td className=" px-6 whitespace-nowrap">
-                <Link to={`/dashboard/my-donation-requests/${_id}`}>
-                    <button className="btn btn-sm btn-warning py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
-                        Edit
-                    </button>
-                </Link>
 
-                <button onClick={() => handleDelete(`/donationReq/${_id}`, refetch)} className="py-2 bg-gray-50  mx-5 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-transparent rounded-lg">
+                <button disabled={role === "volunteer"} onClick={() => handleDelete(`/donationReq/${_id}`, refetch)} className="py-2 bg-gray-50  mx-5 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-transparent rounded-lg">
                     Delete
                 </button>
                 <button onClick={() => setOpenModal(true)} className='btn btn-ghost btn-sm bg-rose-700'>View details</button>
@@ -107,4 +107,4 @@ const DonationReqTable = ({ req, refetch }) => {
     );
 };
 
-export default DonationReqTable;
+export default TableRow;

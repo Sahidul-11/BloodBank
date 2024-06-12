@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import useUser from '../../../hooks/useUser';
 
 const Profile = () => {
-    const {data}=useUser()
+    const {data}=useUser("/user")
+    if (!data) {
+        return
+    }
+    console.log(data)
      const {name ,avatar, email ,BloodGroup,division, district , upazila , role} = data;
     return (
         <div>

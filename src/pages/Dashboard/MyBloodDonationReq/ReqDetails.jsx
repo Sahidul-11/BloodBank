@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import Spinner from '../../../Components/Share/Spinner';
 import useAxiosCommon from '../../../hooks/useAxiosCommon';
+import useAuth from '../../../hooks/useAuth';
+import { BeatLoader } from 'react-spinners';
+import useGetOne from '../../../hooks/useGetOne';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ReqDetails = () => {
     const { id } = useParams()
@@ -12,23 +14,15 @@ const ReqDetails = () => {
     const [divisions, setDivisions] = useState()
     const [districts, setDistrict] = useState()
     const [upo, setUpo] = useState()
-    const { loading, setLoading, user } = useAuth()
+    const { loading, setLoading} = useAuth()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
-    console.log(data)
 
-    const checkBlocked = () => {
-        if (!data?.status) {
-            return toast.error("Sorry , You are blocked")
-        }
-    }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!data?.status) {
-            return toast.error("Sorry , You are blocked")
-        }
+
         const form = e.target;
         const recipientName = form.recipientName.value;
         const hospitalName = form.hospitalName.value;
@@ -39,17 +33,15 @@ const ReqDetails = () => {
         const division = form.division.value;
         const district = form.district.value;
         const upazila = form.upazila.value;
-        const requesterName = user?.displayName;
-        const requesterEmail = user?.email;
-        const status = "pending"
 
-        const request = { requesterName, requesterEmail, recipientName, hospitalName, message, address, dateTime, BloodGroup, division, district, upazila, status }
+        const request = { recipientName, hospitalName, message, address, dateTime, BloodGroup, division, district, upazila,  }
         try {
             setLoading(true)
-            await axiosSecure.put("/donationReq", request)
-            toast.success('successfully requested')
-            navigate('/dashboard')
+            await axiosSecure.put(`/donationReq/?id=${id}`, request)
+            toast.success('successfully updated')
+            navigate('/dashboard/my-donation-requests')
             setLoading(false)
+            refetch()
         }
         catch (err) {
             setLoading(false)
@@ -59,6 +51,7 @@ const ReqDetails = () => {
 
 
     }
+    
     useEffect(() => {
         axiosCommon.get("/division")
             .then(res => setDivisions(res.data))
@@ -79,22 +72,13 @@ const ReqDetails = () => {
             .then(res => setUpo(res.data))
     }
     
-    const { isPending, isError, data, error, refetch } = useQuery({
-        queryKey: ['OneDonation'],
-        queryFn: async () => {
-            const { data } = await axiosSecure.get(`/aDonationReq/${id}`)
-            return data
-        }
-    })
+    const { data, refetch } = useGetOne(`/aDonationReq/${id}`)
+    if(!data){
+        return
+    }
     console.log(data)
-    if (isPending) {
-        return Spinner()
-    }
+    const { requesterName, requesterEmail, recipientName, hospitalName, message, address, dateTime, BloodGroup, division, district, upazila } = data;
 
-    if (isError) {
-        return toast.error(error.message)
-    }
-    console.log(id)
     return (
         <div>
             <div className="font-sans text-slate-800">
@@ -106,22 +90,22 @@ const ReqDetails = () => {
                             <label for="" className="block mt-3 text-3xl text-red-700 text-center font-semibold">
                                 Update Blood Donation  request
                             </label>
-                            <form onSubmit={handleSubmit} method="#" action="#" onClick={checkBlocked} className="mt-10" >
+                            <form onSubmit={handleSubmit} method="#" action="#" className="mt-10" >
                                 <div className=" md:flex justify-between items-center gap-5">
                                     <div className='w-full'>
-                                        <input type="text" defaultValue={user?.displayName} readOnly className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                        <input type="text" defaultValue={requesterName} readOnly className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                                     </div>
                                     <div className="w-full">
-                                        <input defaultValue={user?.email} readOnly className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                        <input defaultValue={requesterEmail} readOnly className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                                     </div>
                                 </div>-
 
                                 <div className=" md:flex justify-between items-center gap-5 mt-7">
                                     <div className='w-full'>
-                                        <input type="text" placeholder="Recipient Name" name='recipientName' recipientName='' className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                        <input type="text" defaultValue={recipientName} name='recipientName' recipientName='' className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                                     </div>
                                     <div className="w-full">
-                                        <input type="text" required name='hospitalName' placeholder="Hospital Name" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                                        <input type="text" required name='hospitalName' defaultValue={hospitalName} className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
                                     </div>
 
                                 </div>
@@ -129,7 +113,7 @@ const ReqDetails = () => {
                                     <div className="mt-2 w-full">
                                         <label htmlFor="" className='text-xl font-semibold'>Select Blood Group</label>
                                         <select name='BloodGroup' className="select select-primary w-full max-w-xs mt-1 block border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
-                                            <option disabled selected>What is Blood group?</option>
+                                            <option disabled selected>{BloodGroup}</option>
                                             <option value="A+">A+</option>
                                             <option value="A-">A-</option>
                                             <option value="B+">B+</option>
@@ -142,14 +126,14 @@ const ReqDetails = () => {
                                     </div>
                                     <div className="w-full">
                                         <label htmlFor="" className='text-xl font-semibold'>Select Date & time</label>
-                                        <input type="datetime-local" required name='dateTime' placeholder="Email address" className="mt-1 block  bg-black w-full border-none  text-white h-11 rounded-xl shadow-lg focus:ring-0" />
+                                        <input type="datetime-local" defaultValue={dateTime} required name='dateTime' placeholder="Email address" className="mt-1 block  bg-black w-full border-none  text-white h-11 rounded-xl shadow-lg focus:ring-0" />
                                     </div>
                                 </div>
                                 <div className="flex gap-3">
                                     <div className="mt-2 w-full">
                                         <label htmlFor="" className='text-xl font-semibold'>Division</label>
                                         <select name='division' onChange={getDis} className="select select-primary w-full max-w-xs mt-1 block border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
-                                            <option disabled selected>What is your Division ?</option>
+                                            <option disabled selected>{division}</option>
                                             {
                                                 divisions && divisions.map(division => <option data-id={division.id} key={division.id} value={division?.name}>{division?.name}</option>)
                                             }
@@ -159,7 +143,7 @@ const ReqDetails = () => {
                                     <div className="mt-2 w-full">
                                         <label htmlFor="" className='text-xl font-semibold'>District</label>
                                         <select name='district' onChange={getUpozila} className="select select-primary w-full max-w-xs mt-1 block border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
-                                            <option disabled selected>What is your district?</option>
+                                            <option disabled selected>{district}</option>
                                             {
                                                 districts && districts.map(district => <option data-id={district.id} key={district.id} value={district?.name}>{district?.name}</option>)
                                             }
@@ -170,7 +154,7 @@ const ReqDetails = () => {
                                 <div className="mt-2 w-full">
                                     <label htmlFor="" className='text-xl font-semibold'>Upazila</label>
                                     <select name='upazila' className="select select-primary w-full max-w-xs mt-1 block border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
-                                        <option disabled selected>What is Upazila</option>
+                                        <option disabled selected>{upazila}</option>
                                         {
                                             upo && upo.map(thana => <option data-id={thana.id} key={thana.id} value={thana?.name}>{thana?.name}</option>)
                                         }
@@ -179,11 +163,11 @@ const ReqDetails = () => {
                                 <div className="md:flex justify-between items-center gap-5">
                                     <div>
                                         <label htmlFor="" className='text-xl font-semibold'>full address</label>
-                                        <textarea placeholder="full address" name='address' className="textarea bg-transparent textarea-bordered border-slate-950 textarea-lg w-full max-w-xs" ></textarea>
+                                        <textarea placeholder="full address" defaultValue={address} name='address' className="textarea bg-transparent textarea-bordered border-slate-950 textarea-lg w-full max-w-xs" ></textarea>
                                     </div>
                                     <div>
                                         <label htmlFor="" className='text-xl font-semibold'>Message</label>
-                                        <textarea placeholder="Message" name='message' className="textarea textarea-bordered bg-transparent border-slate-950 textarea-lg w-full max-w-xs" ></textarea>
+                                        <textarea defaultValue={message} placeholder="Message" name='message' className="textarea textarea-bordered bg-transparent border-slate-950 textarea-lg w-full max-w-xs" ></textarea>
 
                                     </div>
 
@@ -195,7 +179,7 @@ const ReqDetails = () => {
 
 
                                 <div className="mt-7">
-                                    <button type='submit' className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                                    <button type='submit' disabled={loading} className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                                         {loading ? <BeatLoader color="#36d7b7" /> : "Request"}
                                     </button>
                                 </div>

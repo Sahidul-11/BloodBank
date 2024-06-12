@@ -8,6 +8,7 @@ import { LuUsers2 } from 'react-icons/lu';
 import useRole from '../../../hooks/useRole';
 import { FaRegEdit } from 'react-icons/fa';
 import { TiSortAlphabetically } from 'react-icons/ti';
+import { FaCodePullRequest } from 'react-icons/fa6';
 
 
 const Sidebars = () => {
@@ -62,8 +63,8 @@ const Sidebars = () => {
                             </Sidebar.Item>
                         </NavLink>
                         <NavLink to="/dashboard/my-donation-requests">
-                            <Sidebar.Item icon={TiSortAlphabetically }>
-                               My Blood Donation Requests
+                            <Sidebar.Item icon={TiSortAlphabetically}>
+                                My Blood Donation Requests
                             </Sidebar.Item>
                         </NavLink>
                         {
@@ -75,10 +76,20 @@ const Sidebars = () => {
                                 </NavLink>
                             </>
                         }
+                        {
+                            role === "admin" || role === 'volunteer' ? <>
+
+                                <NavLink to="/dashboard/all-blood-donation-request">
+                                    <Sidebar.Item icon={FaCodePullRequest}>
+                                       All Blood Donation Requests
+                                    </Sidebar.Item>
+                                </NavLink>
+                            </> : ''
+                        }
 
                         <NavLink to="/dashboard/create-donation-request">
                             <Sidebar.Item icon={FaRegEdit}>
-                               Create Donation Request
+                                Create Donation Request
                             </Sidebar.Item>
                         </NavLink>
                         <Sidebar.Item href="#" icon={LuUsers2}>

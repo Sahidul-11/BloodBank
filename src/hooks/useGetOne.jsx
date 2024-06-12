@@ -4,25 +4,26 @@ import toast from 'react-hot-toast';
 import Spinner from '../Components/Share/Spinner';
 import useAuth from './useAuth';
 
-const useUser = (rout) => {
-    const {user}=useAuth()
+const useGetOne = (rout) => {
+    const {loading}= useAuth()
     const axiosSecure = useAxiosSecure()
     const { isPending, isError, data, error, refetch } = useQuery({
-        queryKey: [rout , rout],
-        queryFn:async()=>{
-          const {data}= await axiosSecure.get(`${rout}/${user?.email}`)
-          return data
+        queryKey: [rout],
+        enabled: !loading ,
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`${rout}`)
+            return data
         }
-      })
-    
-      if (isPending) {
+    })
+
+    if (isPending) {
         return Spinner()
-      }
-    
-      if (isError) {
+    }
+
+    if (isError) {
         return toast.error(error.message)
-      }
-    return{data, refetch}
+    }
+    return { data, refetch }
 };
 
-export default useUser;
+export default useGetOne;
