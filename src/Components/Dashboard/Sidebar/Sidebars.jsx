@@ -8,7 +8,7 @@ import { LuUsers2 } from 'react-icons/lu';
 import useRole from '../../../hooks/useRole';
 import { FaRegEdit } from 'react-icons/fa';
 import { TiSortAlphabetically } from 'react-icons/ti';
-import { FaCodePullRequest } from 'react-icons/fa6';
+import { FaCodePullRequest, FaPenClip } from 'react-icons/fa6';
 
 
 const Sidebars = () => {
@@ -82,6 +82,11 @@ const Sidebars = () => {
                                 <NavLink to="/dashboard/all-blood-donation-request">
                                     <Sidebar.Item icon={FaCodePullRequest}>
                                        All Blood Donation Requests
+                                    </Sidebar.Item>
+                                </NavLink>
+                                <NavLink to="/dashboard/content-management">
+                                    <Sidebar.Item icon={FaPenClip}>
+                                      Content Management
                                     </Sidebar.Item>
                                 </NavLink>
                             </> : ''
