@@ -1,18 +1,19 @@
 import React from 'react';
-import useUser from '../../../hooks/useUser';
-import DonationReqTable from './DonationReqTable';
+import useGetOne from '../../../hooks/useGetOne';
+import DonationReqTable from '../MyBloodDonationReq/DonationReqTable';
 import Title from '../../../Components/Share/Title';
+import { Link } from 'react-router-dom';
+import Spinner from '../../../Components/Share/Spinner';
 
-const MyBloodDonationReq = () => {
-    const { data ,refetch } = useUser("/donationReq")
-     if (!data) {
-       return  
-     }
-   
+const Recent3 = () => {
+    const { data, refetch } = useGetOne("/recent")
+    if (!data) {
+        return Spinner()
+    }
     return (
-        <div className="max-w-screen-xl mx-auto my-10 px-4 md:px-8" >
+        <div className="max-w-screen-xl mx-auto px-4 md:px-8">
             <div className="text-center">
-                <Title  header={"My Blood Donation Requests"}></Title>
+                <Title  header={"Recent Blood Donation Requests"}></Title>
             </div>
             <div className="items-start justify-between md:flex">
                 <div className="max-w-lg">
@@ -21,7 +22,7 @@ const MyBloodDonationReq = () => {
                     </h3>
 
                 </div>
-               
+
             </div>
             <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
                 <table className="w-full table-auto text-sm text-left">
@@ -37,14 +38,15 @@ const MyBloodDonationReq = () => {
                     </thead>
                     <tbody className="text-gray-600 divide-y">
                         {
-                    
-                        data.map(req=> <DonationReqTable key={req._id} req={req} refetch={refetch}></DonationReqTable>)
+
+                            data.map(req => <DonationReqTable key={req._id} req={req} refetch={refetch}></DonationReqTable>)
                         }
                     </tbody>
                 </table>
             </div>
+          <Link to={"/dashboard/my-donation-requests"} ><button className='btn btn-active block mx-auto my-8 bg-lime-600 text-white'>View All Requests</button></Link>
         </div>
     );
 };
 
-export default MyBloodDonationReq;
+export default Recent3;

@@ -1,4 +1,6 @@
 import React from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
     return (
@@ -13,23 +15,24 @@ const Banner = () => {
                         </h1>
 
                         <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-                        "Giving blood is not just about donating; it's about creating a lifeline that connects us all, showing that every drop counts."
+                            "Giving blood is not just about donating; it's about creating a lifeline that connects us all, showing that every drop counts."
                         </p>
 
                         <div className="mt-8 flex justify-center gap-4">
-                            <a
+                            <Link
+                                to={"/registration"}
                                 className="block w-full rounded border border-rose-600 bg-rose-700 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
-                                href="#"
-                            >
-                                Get Started
-                            </a>
 
-                            <a
-                                className="block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                            >
+                               Join as A Donor
+                            </Link>
+
+                            <Link
+                                className=" justify-center items-center gap-4 w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto flex"
                                 href="#"
                             >
-                                Learn More
-                            </a>
+                               <FaSearch></FaSearch> <span>Search</span>
+                            </Link>
                         </div>
                     </div>
                 </div>

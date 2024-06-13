@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
 import { LuUsers2 } from 'react-icons/lu';
 import useRole from '../../../hooks/useRole';
-import { FaRegEdit } from 'react-icons/fa';
+import { FaHome, FaRegEdit } from 'react-icons/fa';
 import { TiSortAlphabetically } from 'react-icons/ti';
 import { FaCodePullRequest, FaPenClip } from 'react-icons/fa6';
 
@@ -52,6 +52,11 @@ const Sidebars = () => {
                 </Sidebar.Logo>
                 <Sidebar.Items className='min-h-[calc(100vh-150px)] lg:min-h-[calc(100vh-60px)] w-full'>
                     <Sidebar.ItemGroup>
+                        <NavLink to="/">
+                            <Sidebar.Item icon={FaHome}>
+                                Home
+                            </Sidebar.Item>
+                        </NavLink>
                         <NavLink to="/dashboard">
                             <Sidebar.Item icon={HiChartPie}>
                                 Dashboard
@@ -97,13 +102,6 @@ const Sidebars = () => {
                                 Create Donation Request
                             </Sidebar.Item>
                         </NavLink>
-                        <Sidebar.Item href="#" icon={LuUsers2}>
-                            Inbox
-                        </Sidebar.Item>
-
-                        <Sidebar.Item href="#" icon={HiShoppingBag}>
-                            Products
-                        </Sidebar.Item>
                         <div onClick={UserLogOut}>
                             <Sidebar.Item icon={HiArrowSmRight}>
                                 Log Out

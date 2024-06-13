@@ -1,5 +1,6 @@
 import React from 'react';
 import useAuth from '../../../hooks/useAuth';
+import Recent3 from './Recent3';
 
 const Welcome = () => {
     const {user} = useAuth()
@@ -11,6 +12,7 @@ const Welcome = () => {
                 <span className="block lg:text-4xl"> Increase Helping Hand. </span>
             </h1>
           </div>
+          <Recent3/>
         </div>
     );
 };
