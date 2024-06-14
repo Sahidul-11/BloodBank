@@ -20,6 +20,7 @@ import AllBloodDonation from '../pages/Dashboard/AllBloodDonationReq/AllBloodDon
 import AdminVolunteer from './AdminVolunteer'
 import ContentManagement from '../pages/Dashboard/ContentManagement/ContentManagement'
 import AddBlogs from '../pages/Dashboard/ContentManagement/AddBlogs'
+import Search from '../pages/Search/Search'
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: '/registration',
         element:<Registration/>
+      },  
+      {
+        path: '/search',
+        element:<Search/>
       },  
     ],
   },

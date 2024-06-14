@@ -48,9 +48,11 @@ const Registration = () => {
             .then(res=>console.log(res.data))
             toast.success("Successfully Sign up")
             navigate("/")
+            setLoading(false)
 
         }
         catch (err) {
+            setLoading(false)
             toast.error(err?.message)
         }
 

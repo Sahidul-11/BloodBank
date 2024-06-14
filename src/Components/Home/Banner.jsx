@@ -28,8 +28,9 @@ const Banner = () => {
                             </Link>
 
                             <Link
+                            to="/search"
                                 className=" justify-center items-center gap-4 w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto flex"
-                                href="#"
+                               
                             >
                                <FaSearch></FaSearch> <span>Search</span>
                             </Link>

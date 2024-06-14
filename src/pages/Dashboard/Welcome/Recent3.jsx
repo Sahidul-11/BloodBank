@@ -4,14 +4,16 @@ import DonationReqTable from '../MyBloodDonationReq/DonationReqTable';
 import Title from '../../../Components/Share/Title';
 import { Link } from 'react-router-dom';
 import Spinner from '../../../Components/Share/Spinner';
+import useAuth from '../../../hooks/useAuth';
 
 const Recent3 = () => {
-    const { data, refetch } = useGetOne("/recent")
+    const {user}=useAuth()
+    const { data, refetch } = useGetOne(`/recent/${user?.email}`)
     if (!data) {
         return Spinner()
     }
     return (
-        <div className="max-w-screen-xl mx-auto px-4 md:px-8">
+        <div className={`max-w-screen-xl mx-auto px-4 md:px-8 ${data.length>0?"visible": "hidden"}`}>
             <div className="text-center">
                 <Title  header={"Recent Blood Donation Requests"}></Title>
             </div>
