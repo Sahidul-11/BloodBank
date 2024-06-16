@@ -6,10 +6,13 @@ import useAuth from './useAuth';
 
 const useGetOne = (rout) => {
     const {loading}= useAuth()
+    if (!rout) {
+      return  
+    }
     const axiosSecure = useAxiosSecure()
     const { isPending, isError, data, error, refetch } = useQuery({
         queryKey: [rout],
-        enabled: !loading ,
+        enabled: rout && !loading ,
         queryFn: async () => {
             const { data } = await axiosSecure.get(`${rout}`)
             return data

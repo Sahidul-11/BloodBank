@@ -60,6 +60,10 @@ const TableRow = ({ req, refetch }) => {
             <td className="px-6 py-4 whitespace-nowrap capitalize">
                 <div>{status} {status === "pending" && "..."}</div>
                 <div className={`flex ${status === "inprogress" ? "visible" : "hidden"} gap-4 pt-5`}>
+                    <div>
+                    <p className='text-white'>Donor Name : {req?.donor?.donorName}</p>
+                    <p className='text-white'>Donor email : {req?.donor?.email}</p>
+                    </div>
                     <button onClick={() => handleStatus("done")} className='btn btn-success btn-sm'>Done</button>
                     <button onClick={() => handleStatus("cancel")} className='btn btn-warning btn-sm'>Cancel</button>
                 </div>

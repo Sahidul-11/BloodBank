@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import useAxiosCommon from '../../hooks/useAxiosCommon';
-import { data } from 'autoprefixer';
+import { useQuery } from '@tanstack/react-query';
+import DonorCard from './DonorCard';
 
 const Search = () => {
-    const [searchData, setSearchData] = useState([])
+    const [search ,setSearch]=useState()
     const [divisions, setDivisions] = useState()
     const [districts, setDistrict] = useState()
     const [upo, setUpo] = useState()
     const axiosCommon = useAxiosCommon()
     const { loading, setLoading } = useAuth()
-    const navigate = useNavigate()
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,13 +22,10 @@ const Search = () => {
         const district = form.district.value;
         const upazila = form.upazila.value;
         const role = "donor"
-        console.log(BloodGroup)
         try {
 
             setLoading(true)
-            await axiosCommon.get(`/search/?role=${role}&BloodGroup=${BloodGroup}&division=${division}&district=${district}&upazila=${upazila}`)
-                .then( res => set(res.data))
-               
+            setSearch(`/search/?role=${role}&BloodGroup=${BloodGroup}&division=${division}&district=${district}&upazila=${upazila}`)
             setLoading(false)
 
         }
@@ -38,8 +33,9 @@ const Search = () => {
             setLoading(false)
             toast.error(err?.message)
         }
-        console.log(searchData)
     }
+
+    
     useEffect(() => {
         axiosCommon.get("/division")
             .then(res => setDivisions(res.data))
@@ -59,6 +55,22 @@ const Search = () => {
         axiosCommon.get(`/upazila/${id}`)
             .then(res => setUpo(res.data))
     }
+    const { status, data, error } = useQuery({
+        queryKey: ['search' , search],
+        queryFn: async ()=>{
+            const {data} = await axiosCommon.get(search)
+            return data 
+        }
+      })
+
+    
+    if (status === 'pending') {
+        return <span>Loading...</span>
+      }
+    
+      if (status === 'error') {
+        return <span>Error: {error.message}</span>
+      }
     return (
         <div>
             <div className="font-sans text-slate-800">
@@ -117,10 +129,12 @@ const Search = () => {
                                 </div>
 
 
-                                <div className="mt-7">
-                                    <button type='submit' className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
-                                        {loading ? <BeatLoader color="#36d7b7" /> : "Register"}
+                                <div  className="mt-7"><a href="#donor">
+                                <button  type='submit' className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                                        {loading ? <BeatLoader color="#36d7b7" /> : "search"}
                                     </button>
+                                </a>
+                                   
                                 </div>
 
                             </form>
@@ -128,9 +142,9 @@ const Search = () => {
                     </div>
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div id='donor'className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 mx-5 gap-10">
                 {
-                
+                Array.isArray(data)?data.map(donor=><DonorCard key={donor._id} donor ={donor} ></DonorCard>): ""
                 }
             </div>
         </div>

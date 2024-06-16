@@ -34,7 +34,7 @@ const Navbar = () => {
             <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Home</NavLink>
         </li>
         <li className="flex">
-            <NavLink to="/donation-req" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')}>Donation Requests</NavLink>
+            <NavLink to="/pendingReq" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')}>Donation Requests</NavLink>
         </li>
         <li className="flex">
             <NavLink to="/blogs" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Blogs</NavLink>

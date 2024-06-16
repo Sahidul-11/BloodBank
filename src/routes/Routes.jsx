@@ -21,6 +21,8 @@ import AdminVolunteer from './AdminVolunteer'
 import ContentManagement from '../pages/Dashboard/ContentManagement/ContentManagement'
 import AddBlogs from '../pages/Dashboard/ContentManagement/AddBlogs'
 import Search from '../pages/Search/Search'
+import DonationReq from '../pages/DonationReq/DonationReq'
+import DonationReqDetails from '../pages/DonationReq/DonationReqDetails'
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +53,14 @@ export const router = createBrowserRouter([
       {
         path: '/search',
         element:<Search/>
+      },  
+      {
+        path: '/pendingReq',
+        element:<DonationReq/>
+      },  
+      {
+        path: '/pendingReq/:id',
+        element:<PrivateRoute><DonationReqDetails/></PrivateRoute>
       },  
     ],
   },
