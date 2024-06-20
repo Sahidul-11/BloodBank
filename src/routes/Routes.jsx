@@ -23,6 +23,7 @@ import AddBlogs from '../pages/Dashboard/ContentManagement/AddBlogs'
 import Search from '../pages/Search/Search'
 import DonationReq from '../pages/DonationReq/DonationReq'
 import DonationReqDetails from '../pages/DonationReq/DonationReqDetails'
+import BlogDetails from '../pages/Blogs/BlogDetails'
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: '/blogs',
         element:<Blogs/>
+      },
+      {
+        path: '/blogs/:id',
+        element:<PrivateRoute><BlogDetails/></PrivateRoute>
       },
       {
         path: '/logIn',

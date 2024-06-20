@@ -1,6 +1,5 @@
 import React from 'react';
 import DonorCard from '../Search/DonorCard';
-import { FaTimes } from 'react-icons/fa';
 import { FaTimeline } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 

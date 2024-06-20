@@ -22,9 +22,9 @@ const ContentManagement = () => {
                 <h1 className='text-4xl font-bold'>Sort:</h1>
                 <select onChange={handleRole} className="select w-full max-w-xs bg-white text-slate-950">
                     <option disabled selected>Pick one</option>
-                    <option data-id=" ">All</option>
+                    <option data-id={null}>All</option>
                     <option data-id="draft">Draft</option>
-                    <option data-id="published">published</option>
+                    <option data-id="publish">published</option>
                   
                 </select>
             </div>
