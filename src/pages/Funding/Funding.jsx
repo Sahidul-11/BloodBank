@@ -1,5 +1,10 @@
-import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
+import { Button, Modal, } from "flowbite-react";
 import { useRef, useState } from "react";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+import CheckOutForm from "./CheckOutForm";
+
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_STRIPE);
 
 const Funding = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -12,14 +17,10 @@ const Funding = () => {
                 <Modal.Body>
                     <div className="space-y-6">
                         <h3 className="text-xl font-medium text-gray-900 dark:text-white">Give fund to our platform</h3>
-                        <div>
-                            <div>
-                                <label for="username" class="block text-sm text-gray-900 dark:text-gray-300 font-bold">Amount (Usd)</label>
+                        <Elements stripe={stripePromise}>
+                            <CheckOutForm setOpenModal={setOpenModal}/>
+                        </Elements>
 
-                                <input type="number" placeholder="Enter Amount" class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
-                            </div>
-
-                        </div>
                     </div>
                 </Modal.Body>
             </Modal>
