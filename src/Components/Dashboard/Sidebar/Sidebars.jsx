@@ -47,9 +47,10 @@ const Sidebars = () => {
             </div>
 
             <Sidebar aria-label="Sidebar with logo branding example" className={`${isOpen ? "visible" : "hidden lg:visible"} w-full`}>
-                <Sidebar.Logo href="#" img="/favicon.svg" imgAlt="Flowbite logo">
-                    Flowbite
-                </Sidebar.Logo>
+            <div className="flex justify-center items-center gap-4 ">
+                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-16 md:w-20'  />
+                    <h1 className='text-3xl md:text-3xl font-bold'>BloodBank</h1>
+                </div>
                 <Sidebar.Items className='min-h-[calc(100vh-150px)] lg:min-h-[calc(100vh-60px)] w-full'>
                     <Sidebar.ItemGroup>
                         <NavLink to="/">

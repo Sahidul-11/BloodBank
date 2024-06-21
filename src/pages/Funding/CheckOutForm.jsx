@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js';
 import './CheckOutFrom.css'
-import { Button } from 'flowbite-react';
+import { Button, Spinner } from 'flowbite-react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosCommon from '../../hooks/useAxiosCommon';
+import axios from 'axios';
 
 
-const CheckOutForm = ({ setOpenModal }) => {
+const CheckOutForm = ({ setOpenModal ,refetch }) => {
     const { user } = useAuth()
     const [err, setErr] = useState("")
-    const [price, setPrice] = useState(' ')
+    const [price, setPrice] = useState()
     const [clientSecret, setClientSecret] = useState()
     const [process, setProcess] = useState(false)
-    const stripe = useStripe();
+    const stripe = useStripe(" ");
     const elements = useElements();
     const axiosSecure = useAxiosSecure()
+    const axiosCommon = useAxiosCommon()
     useEffect(() => {
         if (price && price > 1) {
             getClientSecret({ price })
@@ -90,11 +93,19 @@ const CheckOutForm = ({ setOpenModal }) => {
                 amount : price,
                 date : new Date(),
             }
-            await axiosSecure.post("/funds" ,paymentInfo)
-            toast.success(`Successfully $ ${price} funded`)
-            setProcess(false)
-            setOpenModal(false)
+            try{
+               const{data}= await axiosSecure.post("/funding",{paymentInfo})
+               console.log(data)
+                toast.success(`Successfully $ ${price} funded`)
+                refetch()
+                setOpenModal(false)
+            }catch(Err){
+               console.log(Err)
+            }
+          
+          
         }
+        setProcess(false)
     };
     return (
         <div>
@@ -122,7 +133,7 @@ const CheckOutForm = ({ setOpenModal }) => {
                 />
                 <div className="flex items-center justify-center gap-10">
                     <button type="submit" disabled={!stripe || !clientSecret || process} className='btn btn-sm btn-warning'>
-                        Give Fund
+                      {process? <Spinner/>: " Give Fund"}
                     </button>
                     <Button color="failure" onClick={() => setOpenModal(false)}>
                         {"Cancel"}
