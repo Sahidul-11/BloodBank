@@ -1,8 +1,34 @@
-# React + Vite
+# 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+**Website Name:** BloodBank
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Hosting Link:** [Hosting Live Site](https://chipper-creponne-b63c16.netlify.app/)
+
+**Git Client Link:** [Git Client LInk](https://github.com/programming-hero-web-course1/b9a12-client-side-Sahidul-11)
+
+**Git Link -server:** [Git Server LInk ](https://github.com/programming-hero-web-course1/b9a12-server-side-Sahidul-11)
+
+
+---
+
+## Features
+
+- Google Authintification
+- All device responsive
+- Mongodb Database
+- Node js
+- Admin Role
+- sweet alert
+- Volenteer role
+- Admin Dashboard
+- Stripe payment system
+- jwt
+
+---
+
+### Additional Points
+
+-React -tooltip 
+- React-simple-typewriter
