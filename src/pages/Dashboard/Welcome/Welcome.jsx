@@ -2,9 +2,14 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import Recent3 from './Recent3';
 import Panel from './Panel';
+import useRole from '../../../hooks/useRole';
 
 const Welcome = () => {
     const {user} = useAuth()
+    const [role, isLoading] =useRole()
+    if (isLoading) {
+      return
+    }
     return (
         <div>
           <div className='text-center w-full'>
@@ -13,9 +18,9 @@ const Welcome = () => {
                 <span className="block lg:text-4xl"> Increase Helping Hand. </span>
             </h1>
           </div>
-          <div className="my-8">
+          {role==="admin" || role==="volunteer"?  <div className="my-8">
             <Panel/>
-          </div>
+          </div>: " "}
           <Recent3/>
         </div>
     );

@@ -31,28 +31,28 @@ const Navbar = () => {
     const link = <>
 
         <li className="flex">
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Home</NavLink>
+            <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center px-4  border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4  border-b-2')} >Home</NavLink>
         </li>
         <li className="flex">
-            <NavLink to="/pendingReq" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')}>Donation Requests</NavLink>
+            <NavLink to="/pendingReq" className={({ isActive }) => (isActive ? 'flex items-center px-4  border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4  border-b-2')}>Donation Requests</NavLink>
         </li>
         <li className="flex">
-            <NavLink to="/blogs" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} >Blogs</NavLink>
+            <NavLink to="/blogs" className={({ isActive }) => (isActive ? 'flex items-center px-4  border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4  border-b-2')} >Blogs</NavLink>
         </li>
         <li className="flex">
-            <NavLink to="/funding" className={({ isActive }) => (isActive ? 'flex items-center px-4 -mb-1 border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4 -mb-1 border-b-2')} > Funding</NavLink>
+            <NavLink to="/funding" className={({ isActive }) => (isActive ? 'flex items-center px-4  border-b-2 dark:border- text-violet-400 dark:text-violet-600 border-violet-400 dark:border-violet-600' : 'flex items-center px-4  border-b-2')} > Funding</NavLink>
         </li>
     </>
     return (
-        <header className=" p-4 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800">
-            <div className="container flex justify-between h-16 mx-auto">
+        <header className="pb-3 pt-1 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800 w-full">
+            <div className=" flex justify-between h-16  w-full">
                 <div>
                     <div className="lg:hidden">
                         <Hamburger toggled={isOpen} toggle={setOpen} />
                     </div>
                     <ul className={`menu bg-base-200 w-56 rounded-box -left-0 absolute ${isOpen ? "visible ease-in duration-300 " : "hidden"}`}>
                         <li>
-                            <h2 className="menu-title">Title</h2>
+                            <h2 className="menu-title">BloodBank</h2>
                             <ul>
                                 {link}
                             </ul>
@@ -60,7 +60,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="flex justify-between items-center gap-4 md:gap-16">
-                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-16 md:w-20'  />
+                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16' />
                     <h1 className='text-3xl md:text-4xl font-bold'>BloodBank</h1>
                 </div>
                 <ul className="items-stretch hidden space-x-3 lg:flex">

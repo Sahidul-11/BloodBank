@@ -15,7 +15,7 @@ const AllBloodDonation = () => {
       return  
     }
     return (
-        <div>
+        <div className='overflow-hidden'>
             <Title header={"All Blood Donation Requests"}></Title>
             <div className='flex justify-center items-center gap-5 mt-7'>
                 <h1 className='text-4xl font-bold '>Sort:</h1>
@@ -40,6 +40,7 @@ const AllBloodDonation = () => {
                 </div>
                 <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
                     <table className="w-full table-auto text-sm text-left">
+
                         <thead className="bg-gray-50 text-gray-600 font-medium border-b">
                             <tr>
                                 <th className="py-3 px-6"> Recipient name</th>
@@ -59,6 +60,37 @@ const AllBloodDonation = () => {
                     </table>
                 </div>
             </div>
+            <div class="flex items-center justify-center mt-6">
+                    <a href="#" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                        </svg>
+
+                        <span>
+                            previous
+                        </span>
+                    </a>
+
+                    <div class="items-center hidden lg:flex gap-x-3">
+                        <a href="#" class="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">2</a>
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">3</a>
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">...</a>
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">12</a>
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">13</a>
+                        <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">14</a>
+                    </div>
+
+                    <a href="#" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+                        <span>
+                            Next
+                        </span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+             </div>
         </div>
     );
 };

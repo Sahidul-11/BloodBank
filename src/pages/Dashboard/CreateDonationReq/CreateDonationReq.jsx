@@ -19,7 +19,6 @@ const CreateDonationReq = () => {
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const { data } = useUser('/user')
-    console.log(data)
 
     const checkBlocked = () => {
         if (!data?.status) {

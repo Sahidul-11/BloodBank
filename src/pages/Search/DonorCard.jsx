@@ -1,7 +1,6 @@
 import React from 'react';
 
 const DonorCard = ({ donor }) => {
-    console.log(donor)
     return (
         <div>
             <a className="group relative block bg-black rounded-xl">

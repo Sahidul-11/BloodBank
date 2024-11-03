@@ -13,7 +13,6 @@ const TableRow = ({ req, refetch }) => {
     if (isLoading) {
        return 
     }
-    console.log(role)
     const { _id, requesterName, requesterEmail, recipientName, hospitalName, message, address, dateTime, BloodGroup, division, district, upazila, status } = req
     const [Date, time] = dateTime.split("T")
     const handleStatus = (changeStatus) => {

@@ -31,7 +31,6 @@ const CheckOutForm = ({ setOpenModal ,refetch }) => {
     const getClientSecret = async total => {
         const { data } = await axiosSecure.post("/create-payment-intent", total)
         setClientSecret(data.clientSecret)
-        console.log(data.clientSecret)
     }
 
     const handleSubmit = async (event) => {
@@ -69,7 +68,6 @@ const CheckOutForm = ({ setOpenModal ,refetch }) => {
             console.log('[error]', error);
         } else {
             setErr(' ')
-            console.log('[PaymentMethod]', paymentMethod);
         }
         //confirm payment 
         const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {

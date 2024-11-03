@@ -1,8 +1,8 @@
-import React from 'react';
-import { Navigate, useLocation, } from 'react-router-dom'
-import useRole from '../hooks/useRole';
-import Spinner from '../Components/Share/Spinner';
-import useAuth from '../hooks/useAuth';
+import { Navigate, useLocation } from "react-router-dom"
+import useRole from "../hooks/useRole"
+import useAuth from "../hooks/useAuth"
+import Spinner from "../Components/Share/Spinner"
+
 
 const AdminRoute = ({ children }) => {
   const [role, isLoading] = useRole()

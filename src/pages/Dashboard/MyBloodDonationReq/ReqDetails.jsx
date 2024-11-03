@@ -76,7 +76,6 @@ const ReqDetails = () => {
     if(!data){
         return
     }
-    console.log(data)
     const { requesterName, requesterEmail, recipientName, hospitalName, message, address, dateTime, BloodGroup, division, district, upazila } = data;
 
     return (

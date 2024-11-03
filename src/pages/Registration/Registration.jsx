@@ -11,7 +11,7 @@ const Registration = () => {
     const [districts, setDistrict] = useState()
     const [upo, setUpo] = useState()
     const axiosCommon = useAxiosCommon()
-    const { createUser, updateUserProfile, loading, setLoading } = useAuth()
+    const { createUser, updateUserProfile, loading, setLoading,user } = useAuth()
     const navigate = useNavigate()
 
 
@@ -43,8 +43,8 @@ const Registration = () => {
             const avatar =data?.data?.display_url
             await createUser(email, password)
             await updateUserProfile(name, data.data.display_url)
-            const user = {name ,avatar, email ,BloodGroup,division, district , upazila , role,status}
-            await axiosCommon.post("/user", user )
+            const User = {name ,avatar, email ,BloodGroup,division, district , upazila , role,status}
+            await axiosCommon.post("/user", User )
             .then(res=>console.log(res.data))
             toast.success("Successfully Sign up")
             navigate("/")

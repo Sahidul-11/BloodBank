@@ -19,12 +19,14 @@ const DonationReqDetails = () => {
     if (!data) {
         return Spinner()
     }
-    console.log(data)
     const { _id, requesterName, requesterEmail, recipientName, hospitalName, message, address, dateTime, BloodGroup, division, district, upazila, status } = data
     const [Date, time] = dateTime.split("T")
 
     const handleDonate = async()=>{
         const email = user?.email
+        if (requesterEmail===email) {
+          return toast.error("you cant Donate on your post")  
+        }
         const donorName= user?.displayName
         const donor ={donorName , email}
         try{
@@ -93,7 +95,7 @@ const DonationReqDetails = () => {
                             </div>
                         </form>
                         <div className="flex justify-center gap-4">
-                            <Button color="failure" onClick={handleDonate}>
+                            <Button  color="failure" onClick={handleDonate}>
                                 {"Yes, I'm sure"}
                             </Button>
                             <Button color="gray" onClick={() => setOpenModal(false)}>

@@ -12,8 +12,8 @@ const Main = () => {
   
   return (
     <div>
-      <div className="fixed w-full z-50"> <Navbar></Navbar></div>
-      <div className='pt-24'>
+      <div className="fixed w-full z-50 container mx-auto"> <Navbar></Navbar></div>
+      <div className='pt-24 container mx-auto'>
         <Outlet />
       </div>
       <Footer/>

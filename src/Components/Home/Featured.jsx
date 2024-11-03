@@ -7,7 +7,6 @@ const Featured = () => {
     if (!data) {
         return Spinner()
     }
-    console.log(data)
     return (
         <div>
             <div>

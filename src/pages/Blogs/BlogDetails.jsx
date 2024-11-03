@@ -7,7 +7,6 @@ const BlogDetails = () => {
     const navigate = useNavigate()
     const {id} = useParams()
     const { data } = useGetOne(`/blogs/${id}`)
-    console.log(data)
     return (
         <div>
             <Card

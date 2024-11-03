@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 
 const Blogs = () => {
     const { data } = useGetOne("/blogs/?status=publish")
-    console.log(data)
+    if (!data) {
+       return 
+    }
     return (
         <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mx-3 my-10">

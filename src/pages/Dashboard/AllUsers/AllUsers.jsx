@@ -34,7 +34,6 @@ const AllUsers = () => {
     if (error) {
         return toast.error(error.message)
     }
-    console.log(data)
     return (
         <div>
             <div>

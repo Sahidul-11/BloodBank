@@ -18,7 +18,6 @@ const Funding = () => {
     if (!data) {
         return Spinner()
     }
-    console.log(data)
     return (
         <div>
             <div className="flex justify-end items-center mr-20 mt-10 mb-24"> <Button onClick={() => setOpenModal(true)}>Give fund </Button></div>

@@ -8,7 +8,6 @@ const Profile = () => {
     if (!data) {
         return
     }
-    console.log(data)
      const {name ,avatar, email ,BloodGroup,division, district , upazila , role} = data;
     return (
         <div>

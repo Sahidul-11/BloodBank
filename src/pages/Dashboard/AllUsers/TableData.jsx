@@ -11,7 +11,6 @@ const TableData = ({ user, refetch }) => {
     const { mutateAsync } = useMutation({
         mutationFn: async (status) => {
             await axiosSecure.put(`/user/${email}/?status=${status}&role=${Role}`)
-            console.log(Role ,status)
         },
         onSuccess: () => {
             refetch()

@@ -9,7 +9,6 @@ const DonationReq = () => {
     if (!data ){
        return Spinner() 
     }
-    console.log(data)
     return (
         <div>
             <Title header={"Blood Donation Requests"}></Title>
