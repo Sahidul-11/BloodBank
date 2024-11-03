@@ -44,22 +44,25 @@ const Navbar = () => {
         </li>
     </>
     return (
-        <header className="pb-3 pt-1 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800 w-full">
-            <div className=" flex justify-between h-16  w-full">
-                <div>
-                    <div className="lg:hidden">
+        <header className=" pb-3 pt-1 bg-gray-800 dark:bg-gray-100 text-gray-100 dark:text-gray-800 w-full flex justify-center items-center ">
+            <div className=" flex justify-between h-16 mx-2 md:mx-10 w-full">
+                <div className="lg:hidden">
+                    <div >
                         <Hamburger toggled={isOpen} toggle={setOpen} />
                     </div>
                     <ul className={`menu bg-base-200 w-56 rounded-box -left-0 absolute ${isOpen ? "visible ease-in duration-300 " : "hidden"}`}>
                         <li>
-                            <h2 className="menu-title">BloodBank</h2>
+                            <div className="flex justify-between items-center gap-4 md:gap-16">
+                                <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16' />
+                                <h1 className='text-2xl font-bold'>BloodBank</h1>
+                            </div>
                             <ul>
                                 {link}
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <div className="flex justify-between items-center gap-4 md:gap-16">
+                <div className=" md:flex justify-between items-center gap-4 md:gap-16 hidden md:visible">
                     <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16' />
                     <h1 className='text-3xl md:text-4xl font-bold'>BloodBank</h1>
                 </div>
@@ -81,10 +84,10 @@ const Navbar = () => {
                         </div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-slate-800">
                             <li><Link to="/dashboard" className='btn btn-outline mb-8 text-xl'> Dashboard</Link></li>
-                            <li onClick={handleLogOut}><button className='btn bg-red-600 hover:text-red-500 text-white'>Log Out</button></li>
+                            <li onClick={handleLogOut}><button className='btn bg-red-600 hover:text-red-500 text-white rounded-lg'>Log Out</button></li>
                         </ul>
                     </div> : <div className="items-center flex-shrink-0 lg:flex">
-                        <Link to="/logIn"> <button className="self-center px-8 py-3 rounded ease-in-out duration-300">Sign in</button></Link>
+                        <Link to="/logIn"> <button className="self-center px-8 py-3  ease-in-out duration-300 btn btn-outline mr-2 rounded-lg">Sign in</button></Link>
                         <Link to="/registration"> <button className="self-center px-8 py-3 font-semibold rounded bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50 ease-in-out duration-300">Register</button></Link>
 
 

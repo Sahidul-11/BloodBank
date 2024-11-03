@@ -39,7 +39,7 @@ const Sidebars = () => {
         return
     }
     return (
-        <div className='w-full'>
+        <div className='w-full float-left'>
             <div className="drawer-content flex items-center justify-between px-2 py-0 lg:py-3 w-full lg:hidden">
                 <h1 className='text-2xl font-bold lg:hidden'>BloodBank</h1>
                 <label onClick={() => setIsOpen(!isOpen)} htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">{isOpen ? "Close drawer" : "Open drawer"}</label>
