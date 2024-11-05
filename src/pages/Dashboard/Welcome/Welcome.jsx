@@ -21,7 +21,7 @@ const Welcome = () => {
           {role==="admin" || role==="volunteer"?  <div className="my-8">
             <Panel/>
           </div>: " "}
-          <Recent3/>
+          <Recent3 />
         </div>
     );
 };

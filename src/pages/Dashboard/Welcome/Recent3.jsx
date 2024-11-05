@@ -26,8 +26,8 @@ const Recent3 = () => {
                 </div>
 
             </div>
-            <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
-                <table className="w-full table-auto text-sm text-left">
+            <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto ">
+                <table className="w-full table-auto text-sm text-left overflow-x-scroll">
                     <thead className="bg-gray-50 text-gray-600 font-medium border-b">
                         <tr>
                             <th className="py-3 px-6"> Recipient name</th>
