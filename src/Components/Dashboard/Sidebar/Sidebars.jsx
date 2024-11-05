@@ -9,14 +9,16 @@ import useRole from '../../../hooks/useRole';
 import { FaHome, FaRegEdit } from 'react-icons/fa';
 import { TiSortAlphabetically } from 'react-icons/ti';
 import { FaCodePullRequest, FaPenClip } from 'react-icons/fa6';
+import Hamburger from 'hamburger-react';
 
 
 const Sidebars = () => {
     const { logOut } = useAuth()
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     const [role, isLoading] = useRole()
     const UserLogOut = () => {
         Swal.fire({
+
             title: "Are you sure?",
             text: "You won't be able to revert this!",
             icon: "warning",
@@ -27,6 +29,7 @@ const Sidebars = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await logOut()
+               setIsOpen(!isOpen)
                 Swal.fire({
                     title: "Logged Out!",
                     text: "Your file has been logged Out.",
@@ -40,30 +43,38 @@ const Sidebars = () => {
     }
     return (
         <div className='w-full float-left'>
-            <div className="drawer-content flex items-center justify-between px-2 py-0 lg:py-3 w-full lg:hidden">
-                <h1 className='text-2xl font-bold lg:hidden'>BloodBank</h1>
-                <label onClick={() => setIsOpen(!isOpen)} htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">{isOpen ? "Close drawer" : "Open drawer"}</label>
+            <div className="drawer-content flex items-center justify-start px-2 py-0 lg:py-3 w-full lg:hidden">
+                <Hamburger toggled={isOpen} toggle={setIsOpen} />
 
             </div>
 
-            <Sidebar aria-label="Sidebar with logo branding example" className={`${isOpen ? "visible" : "hidden lg:visible"} w-full`}>
-            <div className="flex justify-center items-center gap-4 ">
-                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-16 md:w-20'  />
+            <Sidebar
+                aria-label="Sidebar with logo branding example"
+                className={`w-full ${isOpen ? "block" : "hidden"} lg:block`}
+            >
+                <div className="flex justify-center items-center gap-4 ">
+                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-16 md:w-20' />
                     <h1 className='text-3xl md:text-3xl font-bold'>BloodBank</h1>
                 </div>
                 <Sidebar.Items className='min-h-[calc(100vh-150px)] lg:min-h-[calc(100vh-60px)] w-full'>
                     <Sidebar.ItemGroup>
-                        <NavLink to="/">
+                        <NavLink to="/"
+                        onClick={()=>setIsOpen(!isOpen)}
+                        >
                             <Sidebar.Item icon={FaHome}>
                                 Home
                             </Sidebar.Item>
                         </NavLink>
-                        <NavLink to="/dashboard">
+                        <NavLink to="/dashboard"
+                         onClick={()=>setIsOpen(!isOpen)}
+                        >
                             <Sidebar.Item icon={HiChartPie}>
                                 Dashboard
                             </Sidebar.Item>
                         </NavLink>
-                        <NavLink to="/dashboard/profile">
+                        <NavLink to="/dashboard/profile"
+                         onClick={()=>setIsOpen(!isOpen)}
+                        >
                             <Sidebar.Item icon={HiUser}>
                                 Profile
                             </Sidebar.Item>
@@ -75,7 +86,9 @@ const Sidebars = () => {
                         </NavLink>
                         {
                             role === "admin" && <>
-                                <NavLink to="/dashboard/all-users">
+                                <NavLink to="/dashboard/all-users"
+                                 onClick={()=>setIsOpen(!isOpen)}
+                                >
                                     <Sidebar.Item icon={LuUsers2}>
                                         All Users
                                     </Sidebar.Item>
@@ -85,20 +98,26 @@ const Sidebars = () => {
                         {
                             role === "admin" || role === 'volunteer' ? <>
 
-                                <NavLink to="/dashboard/all-blood-donation-request">
+                                <NavLink to="/dashboard/all-blood-donation-request"
+                                 onClick={()=>setIsOpen(!isOpen)}
+                                >
                                     <Sidebar.Item icon={FaCodePullRequest}>
-                                       All Blood Donation Requests
+                                        All Blood Donation Requests
                                     </Sidebar.Item>
                                 </NavLink>
-                                <NavLink to="/dashboard/content-management">
+                                <NavLink to="/dashboard/content-management"
+                                 onClick={()=>setIsOpen(!isOpen)}
+                                >
                                     <Sidebar.Item icon={FaPenClip}>
-                                      Content Management
+                                        Content Management
                                     </Sidebar.Item>
                                 </NavLink>
                             </> : ''
                         }
 
-                        <NavLink to="/dashboard/create-donation-request">
+                        <NavLink to="/dashboard/create-donation-request"
+                         onClick={()=>setIsOpen(!isOpen)}
+                        >
                             <Sidebar.Item icon={FaRegEdit}>
                                 Create Donation Request
                             </Sidebar.Item>

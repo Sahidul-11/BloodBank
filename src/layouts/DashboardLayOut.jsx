@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 const DashboardLayOut = () => {
     return (
         <div className=" relative  md:flex">
-            <div className=" absolute lg:relative min-h-screen left-0 top-0 lg:w-1/4 z-50">
+            <div className=" absolute lg:relative min-h-full left-0 top-0 lg:w-1/4 z-50">
                 <Sidebars />
             </div>
 
