@@ -8,6 +8,7 @@ const Profile = () => {
     if (!data) {
         return
     }
+    // destructure data
      const {name ,avatar, email ,BloodGroup,division, district , upazila , role} = data;
     return (
         <div>
