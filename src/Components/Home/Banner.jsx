@@ -18,7 +18,7 @@ const Banner = () => {
                             "Giving blood is not just about donating; it's about creating a lifeline that connects us all, showing that every drop counts."
                         </p>
 
-                        <div className="mt-8 flex justify-center gap-4">
+                        <div className="mt-8 flex flex-col md:flex-row justify-center gap-4">
                             <Link
                                 to={"/registration"}
                                 className="block w-full rounded border border-rose-600 bg-rose-700 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"

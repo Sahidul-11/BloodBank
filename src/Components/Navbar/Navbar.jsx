@@ -62,12 +62,14 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className=" invisible md:visible md:flex justify-between items-center gap-4 md:gap-16">
-                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16 mt-2  invisible lg:visible' />
-                    <h1 className='text-3xl md:text-4xl font-bold'>BloodBank</h1>
+                <div className="flex justify-between items-center gap-4 md:gap-8">
+                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className="rounded-3xl w-10 md:w-16 mt-2  hidden sm:hidden md:hidden lg:block" />
+                    <h1 className='text-3xl md:text-4xl font-bold
+                     hidden sm:hidden md:block lg:block
+                    '>BloodBank</h1>
                 </div>
-                <div className="pt-5 invisible lg:visible ">
-                    <ul className="items-stretch space-x-3 flex vi lg:flex">
+                <div className="pt-5 hidden sm:hidden md:hidden lg:block ">
+                    <ul className="items-stretch space-x-2 flex vi lg:flex">
                         {
                             link
                         }
