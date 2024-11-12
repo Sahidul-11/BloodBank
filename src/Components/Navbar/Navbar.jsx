@@ -62,15 +62,17 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className=" md:flex justify-between items-center gap-4 md:gap-16 hidden md:visible">
+                <div className=" md:flex justify-between items-center gap-4 md:gap-16">
                     <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16' />
                     <h1 className='text-3xl md:text-4xl font-bold'>BloodBank</h1>
                 </div>
-                <ul className="items-stretch hidden space-x-3 lg:flex">
-
-
+                <ul className="items-stretch space-x-3 flex lg:flex">
                     {
-                        link
+                        link && (
+                            <li className="hidden lg:flex">
+                                {link}
+                            </li>
+                        )
                     }
                 </ul>
                 {
