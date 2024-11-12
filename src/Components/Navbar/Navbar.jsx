@@ -52,8 +52,8 @@ const Navbar = () => {
                     </div>
                     <ul className={`menu bg-base-200 w-56 rounded-box -left-0 absolute ${isOpen ? "visible ease-in duration-300 " : "hidden"}`}>
                         <li>
-                            <div className="flex justify-between items-center gap-4 md:gap-16">
-                                <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16' />
+                            <div className="flex items-center gap-2 ">
+                                <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-8 md:w-10' />
                                 <h1 className='text-2xl font-bold'>BloodBank</h1>
                             </div>
                             <ul>
@@ -62,19 +62,17 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className=" md:flex justify-between items-center gap-4 md:gap-16">
-                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16' />
+                <div className=" invisible md:visible md:flex justify-between items-center gap-4 md:gap-16">
+                    <img src="https://i.ibb.co/vZfWNvd/985.jpg" alt="logo" className='rounded-3xl w-10 md:w-16 mt-2  invisible lg:visible' />
                     <h1 className='text-3xl md:text-4xl font-bold'>BloodBank</h1>
                 </div>
-                <ul className="items-stretch space-x-3 flex lg:flex">
-                    {
-                        link && (
-                            <li className="hidden lg:flex">
-                                {link}
-                            </li>
-                        )
-                    }
-                </ul>
+                <div className="pt-5 invisible lg:visible ">
+                    <ul className="items-stretch space-x-3 flex vi lg:flex">
+                        {
+                            link
+                        }
+                    </ul>
+                </div>
                 {
                     user ? <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button">
